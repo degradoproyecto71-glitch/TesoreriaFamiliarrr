@@ -1,1 +1,256 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tesorería Familiar</title><style>body{font:16px system-ui,sans-serif;background:#f3f6fa;color:#20334a;margin:0;display:grid;min-height:100vh;place-items:center}main{background:#fff;border-radius:14px;padding:32px;max-width:440px;margin:20px;box-shadow:0 4px 20px #0001;text-align:center}a{display:inline-block;background:#183153;color:white;padding:14px 24px;border-radius:8px;text-decoration:none}small{display:block;color:#617181;margin-top:16px}</style></head><body><main><h1>Tesorería Familiar</h1><p>Portal privado para el administrador y los familiares.</p><a id="acceso" href="#">Ingresar a la aplicación</a><small>El inicio de sesión se realiza de forma segura en Cloudflare.</small></main><script>const URL_WORKER='REEMPLAZAR_POR_TU_URL_DE_CLOUDFLARE';const a=document.getElementById('acceso');if(/^https:\/\/[^/]+\.workers\.dev\/?$/.test(URL_WORKER)||/^https:\/\/[^/]+\.[^/]+\/?$/.test(URL_WORKER)){a.href=URL_WORKER}else{a.textContent='Configurar dirección de Cloudflare';a.style.background='#8b2531'}</script></body></html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tesorería Familiar</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f2f5f9;
+      color: #183654;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 38px 30px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.09);
+      text-align: center;
+    }
+
+    .icono {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      background: #e9f0f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 34px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 0 0 12px;
+      color: #173d62;
+    }
+
+    .descripcion {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .opciones {
+      display: grid;
+      gap: 14px;
+    }
+
+    .opcion {
+      padding: 20px;
+      border: 1px solid #dce4ed;
+      border-radius: 12px;
+      text-align: left;
+      background: #ffffff;
+    }
+
+    .opcion h2 {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+
+    .opcion p {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
+
+    .boton {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      background: #173d62;
+      color: white;
+      padding: 13px 15px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .boton:hover {
+      background: #245981;
+    }
+
+    .secundario {
+      background: #eef3f8;
+      color: #173d62;
+    }
+
+    .secundario:hover {
+      background: #dce8f3;
+    }
+
+    .pie {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 25px;
+    }
+
+    #aviso {
+      color: #9b2936;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 480px) {
+      .contenedor {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="contenedor">
+
+    <div class="icono">🏠</div>
+
+    <h1>TESORERÍA FAMILIAR</h1>
+
+    <p class="descripcion">
+      Sistema de administración y consulta de
+      aportes, gastos y actividades familiares.
+    </p>
+
+    <div class="opciones">
+
+      <section class="opcion">
+        <h2>Administrador</h2>
+
+        <p>
+          Acceso privado para gestionar aportes,
+          gastos, actividades, movimientos
+          e informes financieros.
+        </p>
+
+        <a
+          href="#"
+          class="boton"
+          id="btnAdministrador"
+        >
+          Ingresar como administrador
+        </a>
+      </section>
+
+      <section class="opcion">
+        <h2>Familiares</h2>
+
+        <p>
+          Consulta de aportaciones, saldos,
+          gastos y actividades familiares.
+          Acceso de solo lectura.
+        </p>
+
+        <a
+          href="#"
+          class="boton secundario"
+          id="btnFamiliares"
+        >
+          Ingresar como familiar
+        </a>
+      </section>
+
+    </div>
+
+    <p id="aviso" role="status"></p>
+
+    <p class="pie">
+      Tesorería Familiar · Acceso privado
+    </p>
+
+  </main>
+
+  <script>
+    /*
+      CONFIGURACIÓN DE CLOUDFLARE
+
+      Sustituye la dirección siguiente por
+      la URL real de tu Cloudflare Worker.
+
+      No coloques contraseñas en este archivo.
+    */
+
+    const URL_WORKER =
+      "https://tesoreria-familiar-api.TU-SUBDOMINIO.workers.dev";
+
+    function abrirCloudflare(tipo) {
+
+      if (URL_WORKER.includes("TU-SUBDOMINIO")) {
+        document.getElementById("aviso").textContent =
+          "Debes configurar la dirección real de Cloudflare.";
+        return;
+      }
+
+      const url = new URL(URL_WORKER);
+
+      if (url.protocol !== "https:") {
+        document.getElementById("aviso").textContent =
+          "La dirección debe comenzar con https://";
+        return;
+      }
+
+      /*
+        El Worker muestra el formulario
+        de inicio de sesión.
+
+        El usuario selecciona allí
+        Administrador o Familiares.
+      */
+
+      window.location.href = url.origin + "/";
+    }
+
+    document.getElementById(
+      "btnAdministrador"
+    ).addEventListener("click", function(event) {
+      event.preventDefault();
+      abrirCloudflare("admin");
+    });
+
+    document.getElementById(
+      "btnFamiliares"
+    ).addEventListener("click", function(event) {
+      event.preventDefault();
+      abrirCloudflare("lector");
+    });
+  </script>
+
+</body>
+</html>
