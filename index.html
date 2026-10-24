@@ -4,10 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173d62">
 
-  <title>Tesorería Familiar</title>
+  <title>Tesorería Familiar | Acceso</title>
 
   <style>
+    :root {
+      --azul: #173d62;
+      --azul-claro: #285e86;
+      --fondo: #f1f5f9;
+      --texto: #183654;
+      --gris: #64748b;
+      --borde: #dce4ed;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -15,113 +25,122 @@
     body {
       margin: 0;
       min-height: 100vh;
+      padding: 24px 16px;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f2f5f9;
-      color: #183654;
+      background: var(--fondo);
+      color: var(--texto);
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 20px;
+      justify-content: center;
     }
 
     .contenedor {
       width: 100%;
-      max-width: 520px;
-      background: #ffffff;
-      border-radius: 18px;
+      max-width: 560px;
+      background: white;
       padding: 38px 30px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.09);
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(20, 45, 70, 0.09);
+    }
+
+    .encabezado {
       text-align: center;
+      margin-bottom: 30px;
     }
 
     .icono {
-      width: 70px;
-      height: 70px;
-      border-radius: 18px;
-      background: #e9f0f7;
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 22px;
+      border-radius: 20px;
+      background: #eaf1f8;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 34px;
+      font-size: 39px;
     }
 
     h1 {
+      margin: 0 0 14px;
       font-size: 30px;
-      margin: 0 0 12px;
-      color: #173d62;
+      color: var(--azul);
+      letter-spacing: 0.2px;
     }
 
     .descripcion {
+      color: var(--gris);
+      line-height: 1.7;
       font-size: 15px;
-      line-height: 1.6;
-      color: #64748b;
-      margin-bottom: 30px;
+      margin: 0;
     }
 
     .opciones {
       display: grid;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .opcion {
-      padding: 20px;
-      border: 1px solid #dce4ed;
-      border-radius: 12px;
-      text-align: left;
+    .tarjeta {
+      padding: 23px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
       background: #ffffff;
     }
 
-    .opcion h2 {
-      font-size: 18px;
-      margin: 0 0 8px;
+    .tarjeta h2 {
+      font-size: 19px;
+      margin: 0 0 10px;
+      color: var(--azul);
     }
 
-    .opcion p {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.5;
-      margin: 0 0 16px;
+    .tarjeta p {
+      margin: 0 0 19px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--gris);
     }
 
     .boton {
       display: block;
       width: 100%;
-      border: none;
-      border-radius: 9px;
-      background: #173d62;
-      color: white;
-      padding: 13px 15px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: bold;
+      padding: 15px;
+      border-radius: 10px;
+      background: var(--azul-claro);
+      color: #ffffff;
       text-align: center;
-      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      transition: background 0.2s ease;
     }
 
-    .boton:hover {
-      background: #245981;
+    .boton:hover,
+    .boton:focus-visible {
+      background: var(--azul);
     }
 
-    .secundario {
-      background: #eef3f8;
-      color: #173d62;
+    .boton-familiar {
+      background: #e9f0f6;
+      color: var(--azul);
     }
 
-    .secundario:hover {
-      background: #dce8f3;
+    .boton-familiar:hover,
+    .boton-familiar:focus-visible {
+      background: #d4e3ef;
+    }
+
+    .informacion {
+      text-align: center;
+      margin-top: 25px;
+      color: var(--gris);
+      font-size: 12px;
+      line-height: 1.6;
     }
 
     .pie {
-      font-size: 12px;
+      margin-top: 20px;
+      text-align: center;
       color: #94a3b8;
-      margin-top: 25px;
-    }
-
-    #aviso {
-      color: #9b2936;
-      font-size: 13px;
-      margin-top: 15px;
+      font-size: 12px;
     }
 
     @media (max-width: 480px) {
@@ -132,6 +151,10 @@
       h1 {
         font-size: 25px;
       }
+
+      .tarjeta {
+        padding: 19px;
+      }
     }
   </style>
 </head>
@@ -140,36 +163,48 @@
 
   <main class="contenedor">
 
-    <div class="icono">🏠</div>
+    <header class="encabezado">
 
-    <h1>TESORERÍA FAMILIAR</h1>
+      <div class="icono" aria-hidden="true">
+        🏠
+      </div>
 
-    <p class="descripcion">
-      Sistema de administración y consulta de
-      aportes, gastos y actividades familiares.
-    </p>
+      <h1>TESORERÍA FAMILIAR</h1>
+
+      <p class="descripcion">
+        Sistema privado de administración y consulta
+        de aportes, gastos y actividades familiares.
+      </p>
+
+    </header>
 
     <div class="opciones">
 
-      <section class="opcion">
+      <!-- ACCESO ADMINISTRADOR -->
+
+      <section class="tarjeta">
+
         <h2>Administrador</h2>
 
         <p>
-          Acceso privado para gestionar aportes,
-          gastos, actividades, movimientos
-          e informes financieros.
+          Acceso privado para gestionar aportes
+          mensuales, gastos de internet, actividades
+          familiares, movimientos e informes.
         </p>
 
         <a
-          href="#"
           class="boton"
-          id="btnAdministrador"
+          href="https://tesoreria-familiar-api.degradoproyecto71.workers.dev/"
         >
           Ingresar como administrador
         </a>
+
       </section>
 
-      <section class="opcion">
+      <!-- ACCESO FAMILIARES -->
+
+      <section class="tarjeta">
+
         <h2>Familiares</h2>
 
         <p>
@@ -179,78 +214,27 @@
         </p>
 
         <a
-          href="#"
-          class="boton secundario"
-          id="btnFamiliares"
+          class="boton boton-familiar"
+          href="https://tesoreria-familiar-api.degradoproyecto71.workers.dev/"
         >
           Ingresar como familiar
         </a>
+
       </section>
 
     </div>
 
-    <p id="aviso" role="status"></p>
-
-    <p class="pie">
-      Tesorería Familiar · Acceso privado
+    <p class="informacion">
+      El inicio de sesión se realiza en Cloudflare.
+      Selecciona el tipo de acceso correspondiente
+      e ingresa con tus credenciales.
     </p>
 
+    <footer class="pie">
+      Tesorería Familiar · Sistema de gestión familiar
+    </footer>
+
   </main>
-
-  <script>
-    /*
-      CONFIGURACIÓN DE CLOUDFLARE
-
-      Sustituye la dirección siguiente por
-      la URL real de tu Cloudflare Worker.
-
-      No coloques contraseñas en este archivo.
-    */
-
-    const URL_WORKER =
-      "tesoreria-familiar-api.degradoproyecto71.workers.dev";
-
-    function abrirCloudflare(tipo) {
-
-      if (URL_WORKER.includes("TU-SUBDOMINIO")) {
-        document.getElementById("aviso").textContent =
-          "Debes configurar la dirección real de Cloudflare.";
-        return;
-      }
-
-      const url = new URL(URL_WORKER);
-
-      if (url.protocol !== "https:") {
-        document.getElementById("aviso").textContent =
-          "La dirección debe comenzar con https://";
-        return;
-      }
-
-      /*
-        El Worker muestra el formulario
-        de inicio de sesión.
-
-        El usuario selecciona allí
-        Administrador o Familiares.
-      */
-
-      window.location.href = url.origin + "/";
-    }
-
-    document.getElementById(
-      "btnAdministrador"
-    ).addEventListener("click", function(event) {
-      event.preventDefault();
-      abrirCloudflare("admin");
-    });
-
-    document.getElementById(
-      "btnFamiliares"
-    ).addEventListener("click", function(event) {
-      event.preventDefault();
-      abrirCloudflare("lector");
-    });
-  </script>
 
 </body>
 </html>
